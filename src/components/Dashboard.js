@@ -1,6 +1,9 @@
 import React from 'react'
 
-function Dashboard() {
+function Dashboard(props) {
+
+    console.log('dashboard', props)
+    
     return(
         <div>
             <h1>Welcome!</h1>

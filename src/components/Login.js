@@ -23,6 +23,7 @@ function Login(props) {
                 rundownContext.setUserInfo(res.data)
                 localStorage.setItem('user', JSON.stringify(res.data))
                 setLoggedIn(true)
+                console.log('login', res)
             } else {
                 console.log('login error')
                 alert('A user with that username or password was not found.')
