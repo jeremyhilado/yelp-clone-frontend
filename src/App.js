@@ -1,5 +1,6 @@
 import React, {useState, createContext} from 'react';
 import './App.css';
+import Main from './components/Main'
 
 
 function App() {
@@ -7,6 +8,8 @@ function App() {
     const result = localStorage.getItem('user')
     return result ? JSON.parse(result) : []
   })
+
+  
 
   return (
     <div className="App">
@@ -23,3 +26,4 @@ function App() {
 }
 
 export default App
+export const RundownContext = createContext()

@@ -1,0 +1,19 @@
+.login-form {
+  position: relative;
+  top: 200px;
+}
+
+.home-div {
+  text-align: center;
+  position: relative;
+  top: 200px;
+}
+
+.home-btn {
+  margin-top: 25px;
+}
+
+.signup-form {
+  position: relative;
+  top: 75px;
+}
