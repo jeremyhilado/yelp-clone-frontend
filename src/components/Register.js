@@ -33,14 +33,14 @@ function Register(props) {
         })
     }
     return(
-        <div class="container signup-form">
+        <div className="container signup-form">
             <h1>Sign Up</h1>
             <form onSubmit={handleRegister}>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="exampleInputEmail1">Email</label>
                     <input 
                         type="email" 
-                        class="form-control" 
+                        className="form-control" 
                         id="exampleInputEmail1" 
                         aria-describedby="emailHelp"
                         name='email'
@@ -48,11 +48,11 @@ function Register(props) {
                         onChange={handleChange} required
                     />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="exampleInputEmail1">Username</label>
                     <input 
                         type="text" 
-                        class="form-control" 
+                        className="form-control" 
                         id="exampleInputEmail1" 
                         aria-describedby="emailHelp"
                         name='username'
@@ -60,11 +60,11 @@ function Register(props) {
                         onChange={handleChange} required
                     />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="exampleInputEmail1">Password (must be at least 8 characters)</label>
                     <input 
                         type="password" 
-                        class="form-control" 
+                        className="form-control" 
                         id="exampleInputEmail1" 
                         aria-describedby="emailHelp"
                         name='password'
@@ -72,11 +72,11 @@ function Register(props) {
                         onChange={handleChange} required
                     />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="exampleInputEmail1">First Name</label>
                     <input 
                         type="text" 
-                        class="form-control" 
+                        className="form-control" 
                         id="exampleInputEmail1" 
                         aria-describedby="emailHelp"
                         name='first_name'
@@ -84,18 +84,18 @@ function Register(props) {
                         onChange={handleChange} required
                     />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <label for="exampleInputPassword1">Last Name</label>
                     <input 
                         type="text" 
-                        class="form-control" 
+                        className="form-control" 
                         id="exampleInputPassword1"
                         name='last_name'
                         value={userInfo.last_name}
                         onChange={handleChange} required
                     />
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
             {loggedIn && <Redirect to='/dashboard' />}
         </div>
