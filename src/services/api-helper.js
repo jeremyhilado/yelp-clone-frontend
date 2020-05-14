@@ -41,6 +41,21 @@ export const getBusinesses = async (token) => {
     }
 }
 
+export const getReviews = async (token) => {
+    try {
+        const res = await api.get('/api/reviews/', {
+            headers: {
+                authorization: 'JWT ' + token
+            }
+        })
+        return res
+    }
+    catch (err) {
+        console.log(err)
+        return err
+    }
+}
+
 export const createBusiness = async (business, token) => {
     try {
         const res = await api.post('/api/businesses/', business, {
@@ -58,7 +73,7 @@ export const createBusiness = async (business, token) => {
 
 export const updateBusiness = async (id, business, token) => {
     try {
-        const res = await api.put(`/api/businesses/${id}`, business, {
+        const res = await api.put(`/api/businesses/${id}/`, business, {
             headers: {
                 authorization: 'JWT ' + token
             }
@@ -73,7 +88,7 @@ export const updateBusiness = async (id, business, token) => {
 
 export const deleteBusiness = async (id, token) => {
     try {
-        const res = await api.delete(`/api/businesses/${id}`, {
+        const res = await api.delete(`/api/businesses/${id}/`, {
             headers: {
                 authorization: 'JWT ' + token
             }
@@ -102,7 +117,7 @@ export const createReview = async (review, token) => {
 
 export const updateReview = async (id, review, token) => {
     try {
-        const res = await api.put(`/api/reviews/${id}`, review, {
+        const res = await api.put(`/api/reviews/${id}/`, review, {
             headers: {
                 authorization: 'JWT ' + token
             }
@@ -117,7 +132,7 @@ export const updateReview = async (id, review, token) => {
 
 export const deleteReview = async (id, token) => {
     try {
-        const res = await api.delete(`/api/reviews/${id}`, {
+        const res = await api.delete(`/api/reviews/${id}/`, {
             headers: {
                 authorization: 'JWT ' + token
             }

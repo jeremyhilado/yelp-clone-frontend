@@ -21,7 +21,7 @@
 .detail-header {
   display: flex;
   justify-content: space-between;
-  margin: 10px;
+  margin: 10px 0 10px 0;
 }
 
 .detail-info {
@@ -61,6 +61,34 @@
   padding-top: 40px;
 }
 
+.detail-reviews {
+  padding-top: 30px;
+}
+
+.review-card {
+  margin-bottom: 10px;
+}
+
+.dashboard {
+  padding-top: 20px;
+}
+
+.navbar-link {
+  padding: 0 20px 0 20px;
+}
+
+.edit-review-del {
+  margin-left: 20px;
+}
+
+.col-md-4 {
+  background-size: 100% 100%;
+}
+
+.add-business {
+  padding: 10px 0 30px 0;
+}
+
 @media(min-width: 769px) {
   .detail-info {
     grid-template-columns: repeat(2, 1fr);
@@ -71,6 +99,12 @@
   }
 
   .detail-img {
-    width: 45vw;
+    width: 30vw;
   }
+
+  .dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
 }

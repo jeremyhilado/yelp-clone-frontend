@@ -9,6 +9,8 @@ import {Route, Switch} from 'react-router'
 import Dashboard from './Dashboard'
 import Home from './Home'
 import CreateReview from './CreateReview'
+import EditReview from './EditReview'
+import EditBusiness from './EditBusiness'
 
 function Main() {
     return(
@@ -20,6 +22,9 @@ function Main() {
                 <Route exact path='/dashboard' component={Dashboard} />
                 <Route exact path='/business/:name' component={BusinessDetail} />
                 <Route exact path='/business/:name/writereview' component={CreateReview} />
+                <Route exact path='/business/:name/editreview/:id' component={EditReview} />
+                <Route exact path='/create' component={CreateBusiness} />
+                <Route exact path='/business/:name/editbusiness/:id' component={EditBusiness} />
             </Switch>
 
         </div>

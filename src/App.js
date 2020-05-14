@@ -1,7 +1,9 @@
 import React, {useState, useEffect, createContext} from 'react';
 import './App.css';
 import Main from './components/Main'
-import {getBusinesses, login, register, createReview} from './services/api-helper'
+import Navbar from './components/Navbar'
+import {getBusinesses, login, register, createReview, updateReview, getReviews, createBusiness, updateBusiness} from './services/api-helper'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 function App() {
@@ -28,6 +30,18 @@ function App() {
     review: ''
   })
   const [reviewCreated, setReviewCreated] = useState(false)
+  const [reviewId, setReviewId] = useState('')
+  const [reviews, setReviews] = useState([])
+  const [businessInfo, setBusinessInfo] = useState({
+    name: '',
+    image_url: '',
+    location_city: '',
+    location_state: '',
+    category: '',
+    price: '',
+    phone: ''
+  })
+  const [businessCreated, setBusinessCreated] = useState(false)
 
   const handleLoginChange = e => {
     const value = e.target.value
@@ -42,6 +56,11 @@ function App() {
   const handleReviewChange = e => {
     const value = e.target.value
     setReviewInfo({...reviewInfo, [e.target.name]: value})
+  }
+
+  const handleBusinessChange = e => {
+    const value = e.target.value
+    setBusinessInfo({...businessInfo, [e.target.name]: value})
   }
 
   const handleLogin = async (e) => {
@@ -81,17 +100,49 @@ function App() {
       } else {
         alert('There was a problem with creating your review.')
       }
-    })
+    }).then(setReviewCreated(false))
   }
 
+  const handleCreateBusiness = async (e) => {
+    e.preventDefault()
+    await createBusiness(businessInfo, userInfo.token).then(res => {
+      if(res.status === 201) {
+        alert('Business successfully added!')
+        setBusinessCreated(true)
+      } else {
+        alert('There was a problem with adding this business.')
+      }
+    }).then(setBusinessCreated(false))
+  }
+
+  const handleEditReview = async (e) => {
+    e.preventDefault()
+    await updateReview(reviewId, reviewInfo, userInfo.token).then(res => {
+      if(res.status === 200) {
+        alert('Review successfully updated!')
+        setReviewCreated(true)
+      } else {
+        alert('There was a problem with editing your view.')
+      }
+    }).then(setReviewCreated(false))
+  }
+
+  const handleEditBusiness = async (e) => {
+    e.preventDefault()
+    await 
+  }
+  
   useEffect(() => {
-    const businessList = async () => {
-        const res = await getBusinesses(userInfo.token)
-        console.log('App - res', res)
-        setBusinesses(res.data)
+    const makeApiCall = async () => {
+        const res1 = await getBusinesses(userInfo.token)
+        const res2 = await getReviews(userInfo.token)
+        setBusinesses(res1.data)
+        setReviews(res2.data)
     }
-    businessList()
-  }, [])
+    makeApiCall()
+  }, [businesses, reviewCreated])
+
+  console.log('App - reviews', reviews)
 
   return(
     <div className="App">
@@ -114,9 +165,19 @@ function App() {
           handleReviewChange,
           handleCreateReview,
           reviewCreated,
-          setReviewCreated
+          setReviewCreated,
+          reviewInfo,
+          handleEditReview,
+          reviews,
+          setReviews,
+          setReviewId,
+          handleBusinessChange,
+          businessCreated,
+          businessInfo,
+          handleCreateBusiness
         }
       }>
+        <Navbar/>
         <Main/>
       </RundownContext.Provider>
     </div>
