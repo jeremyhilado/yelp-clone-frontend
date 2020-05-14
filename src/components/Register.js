@@ -1,41 +1,14 @@
 import React, {useContext, useState} from 'react'
-import {register} from '../services/api-helper'
 import {RundownContext} from '../App'
 import {Redirect} from 'react-router-dom'
 
 function Register(props) {
     const rundownContext = useContext(RundownContext)
-    const [userInfo, setUserInfo] = useState({
-        email: '',
-        username: '',
-        password: '',
-        first_name: '',
-        last_name: ''
-    })
-    const [loggedIn, setLoggedIn] = useState(false)
-
-    const handleChange = e => {
-        const value = e.target.value
-        setUserInfo({...userInfo, [e.target.name]: value})
-    }
-
-    const handleRegister = async (e) => {
-        e.preventDefault()
-        await register(userInfo).then(res => {
-            if(res.status === 201) {
-                rundownContext.setUserInfo(res.data)
-                localStorage.setItem('user', JSON.stringify(res.data))
-                setLoggedIn(true)
-            } else {
-                console.log('registration error')
-                alert('There was a problem creating your account.')
-            }
-        })
-    }
+   
     return(
         <div className="container signup-form">
             <h1>Sign Up</h1>
-            <form onSubmit={handleRegister}>
+            <form onSubmit={rundownContext.handleRegister}>
                 <div className="form-group">
                     <label for="exampleInputEmail1">Email</label>
                     <input 
@@ -44,8 +17,8 @@ function Register(props) {
                         id="exampleInputEmail1" 
                         aria-describedby="emailHelp"
                         name='email'
-                        value={userInfo.email}
-                        onChange={handleChange} required
+                        value={rundownContext.userSignup.email}
+                        onChange={rundownContext.handleRegisterChange} required
                     />
                 </div>
                 <div className="form-group">
@@ -56,8 +29,8 @@ function Register(props) {
                         id="exampleInputEmail1" 
                         aria-describedby="emailHelp"
                         name='username'
-                        value={userInfo.username}
-                        onChange={handleChange} required
+                        value={rundownContext.userSignup.username}
+                        onChange={rundownContext.handleRegisterChange} required
                     />
                 </div>
                 <div className="form-group">
@@ -68,8 +41,8 @@ function Register(props) {
                         id="exampleInputEmail1" 
                         aria-describedby="emailHelp"
                         name='password'
-                        value={userInfo.password}
-                        onChange={handleChange} required
+                        value={rundownContext.userSignup.password}
+                        onChange={rundownContext.handleRegisterChange} required
                     />
                 </div>
                 <div className="form-group">
@@ -80,8 +53,8 @@ function Register(props) {
                         id="exampleInputEmail1" 
                         aria-describedby="emailHelp"
                         name='first_name'
-                        value={userInfo.first_name}
-                        onChange={handleChange} required
+                        value={rundownContext.userSignup.first_name}
+                        onChange={rundownContext.handleRegisterChange} required
                     />
                 </div>
                 <div className="form-group">
@@ -91,13 +64,13 @@ function Register(props) {
                         className="form-control" 
                         id="exampleInputPassword1"
                         name='last_name'
-                        value={userInfo.last_name}
-                        onChange={handleChange} required
+                        value={rundownContext.userSignup.last_name}
+                        onChange={rundownContext.handleRegisterChange} required
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-            {loggedIn && <Redirect to='/dashboard' />}
+            {rundownContext.loggedIn && <Redirect to='/dashboard' />}
         </div>
     )
 }

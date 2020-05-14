@@ -17,3 +17,60 @@
   position: relative;
   top: 75px;
 }
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.detail-info {
+  display: grid;
+  justify-items: center;
+}
+
+.detail-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.detail-details h3 {
+  padding: 10px;
+}
+
+.detail-img {
+  width: 80vw;
+}
+
+.review-form {
+  position: relative;
+  top: 40px;
+}
+
+.form-check {
+  padding-right: 50px;
+}
+
+.review-rating {
+  font-weight: 400;
+  font-size: 17px;
+}
+
+.review-text {
+  padding-top: 40px;
+}
+
+@media(min-width: 769px) {
+  .detail-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .detail-details h3 {
+    padding: 30px;
+  }
+
+  .detail-img {
+    width: 45vw;
+  }
+}

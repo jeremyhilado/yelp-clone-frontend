@@ -18,7 +18,7 @@ function Login(props) {
                         aria-describedby="emailHelp"
                         name='username'
                         value={rundownContext.user.username}
-                        onChange={rundownContext.handleChange} required
+                        onChange={rundownContext.handleLoginChange} required
                     />
                 </div>
                 <div className="form-group">
@@ -29,7 +29,7 @@ function Login(props) {
                         id="exampleInputPassword1"
                         name='password'
                         value={rundownContext.user.password}
-                        onChange={rundownContext.handleChange} required
+                        onChange={rundownContext.handleLoginChange} required
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>

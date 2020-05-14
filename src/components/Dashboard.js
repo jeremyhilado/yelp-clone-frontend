@@ -6,6 +6,7 @@ function Dashboard(props) {
     const rundownContext = useContext(RundownContext)
    
     console.log('Dashboard', props)
+    console.log('Dashboard useContext', rundownContext.businesses)
 
     const renderBusinesses = rundownContext.businesses.map((business, i) => {
         return(
