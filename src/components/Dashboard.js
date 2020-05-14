@@ -1,25 +1,13 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useContext} from 'react'
 import {RundownContext} from '../App'
-import {getBusinesses} from '../services/api-helper'
 import {Link} from 'react-router-dom'
 
 function Dashboard(props) {
     const rundownContext = useContext(RundownContext)
-    const [businesses, setBusinesses] = useState([])
-
-    useEffect(() => {
-        const businesses = async () => {
-            const res = await getBusinesses(rundownContext.userInfo.token)
-            console.log('Dashboard - res', res)
-            setBusinesses(res.data)
-        }
-        businesses()
-    }, [])
-
    
-    console.log('Dashboard', businesses)
+    console.log('Dashboard', props)
 
-    const businessList = businesses.map((business, i) => {
+    const renderBusinesses = rundownContext.businesses.map((business, i) => {
         return(
             <Link key={i} to={`/business/${business.name}`}>
                 <div className="card mb-3" style={{maxWidth: 540}}>
@@ -42,7 +30,7 @@ function Dashboard(props) {
 
     return(
         <div className="container">
-            {businessList}
+            {renderBusinesses}
         </div>
     )
 }

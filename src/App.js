@@ -1,4 +1,4 @@
-import React, {useState, createContext} from 'react';
+import React, {useState, useEffect, createContext} from 'react';
 import './App.css';
 import Main from './components/Main'
 import {getBusinesses, login} from './services/api-helper'
@@ -23,11 +23,14 @@ function App() {
     setUser({...user, [e.target.name]: value})
   }
 
-  const businessList = async () => {
-    const res = await getBusinesses(userInfo.token)
-    console.log('App - res', res)
-    setBusinesses(res.data)
-  }
+  useEffect(() => {
+    const businessList = async () => {
+        const res = await getBusinesses(userInfo.token)
+        console.log('App - res', res)
+        setBusinesses(res.data)
+    }
+    businessList()
+  }, [businesses])
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -54,7 +57,6 @@ function App() {
           setUserInfo,
           businesses,
           setBusinesses,
-          businessList,
           handleChange,
           handleLogin,
           loggedIn,
