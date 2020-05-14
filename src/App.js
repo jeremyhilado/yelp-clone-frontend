@@ -42,6 +42,7 @@ function App() {
     phone: ''
   })
   const [businessCreated, setBusinessCreated] = useState(false)
+  const [businessId, setBusinessId] = useState('')
 
   const handleLoginChange = e => {
     const value = e.target.value
@@ -122,14 +123,21 @@ function App() {
         alert('Review successfully updated!')
         setReviewCreated(true)
       } else {
-        alert('There was a problem with editing your view.')
+        alert('There was a problem with editing your review.')
       }
     }).then(setReviewCreated(false))
   }
 
   const handleEditBusiness = async (e) => {
     e.preventDefault()
-    await 
+    await updateBusiness(businessId, businessInfo, userInfo.token).then(res => {
+      if(res.status === 200) {
+        alert('Business successfully updated!')
+        setBusinessCreated(true)
+      } else {
+        alert('There was a problem with editing this business.')
+      }
+    }).then(setBusinessCreated(false))
   }
   
   useEffect(() => {
@@ -174,7 +182,9 @@ function App() {
           handleBusinessChange,
           businessCreated,
           businessInfo,
-          handleCreateBusiness
+          handleCreateBusiness,
+          setBusinessId,
+          handleEditBusiness
         }
       }>
         <Navbar/>

@@ -24,7 +24,7 @@ function EditReview(props) {
                 alert('Review successfully deleted!')
                 setIsDeleted(true)
             } else {
-                alert('We are unable to delete this review.')
+                alert('You do not have permission to delete this review.')
             }
         }).then(setIsDeleted(false))
     }

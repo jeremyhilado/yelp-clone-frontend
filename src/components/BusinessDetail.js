@@ -1,14 +1,27 @@
-import React, {useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import {RundownContext} from '../App'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
+import {deleteBusiness} from '../services/api-helper'
 
 function BusinessDetail(props) {
     const rundownContext = useContext(RundownContext)
+    rundownContext.setBusinessId(Number(props.match.params.id))
+    const [isDeleted, setIsDeleted] = useState(false)
+
+    console.log('BusinessDetail props', props)
     
     const business = rundownContext.businesses.filter(business => {
         return business.name === props.match.params.name
     })
 
+    console.log('BusinessDetail business', business)
+
+    const delBusiness = async (id) => {
+        await deleteBusiness(business[0].id, rundownContext.userInfo.token).then(res => {
+                alert('Business successfully deleted!')
+                setIsDeleted(true)
+        }).then(setIsDeleted(false))
+    }
 
 
     if(business[0]) {
@@ -30,7 +43,9 @@ function BusinessDetail(props) {
                 <div className="detail-header">
                     <h1>{business[0].name}</h1>
                     <div>
-                    <Link to={`/business/${business[0].name}/writereview`}><button type="button" className="btn btn-info">Write Review</button></Link>
+                    <Link to={`/business/${business[0].name}/writereview`}><button type="button" className="btn btn-info detail-write-btn">Write Review</button></Link>
+                    <Link to={`/business/${business[0].name}/editbusiness/${business[0].id}`}><button type="button" className="btn btn-info detail-write-btn">Edit Business</button></Link>
+                    <button type="button" className="btn btn-danger edit-review-del" onClick={delBusiness}>Delete Business</button>
                     </div>
                 </div>
                 <div className="detail-info">
@@ -46,6 +61,7 @@ function BusinessDetail(props) {
                     <h3>Reviews</h3>
                     {reviews}
                 </div>
+                {isDeleted && <Redirect to='/dashboard' />}
             </div>
         )
     } else {

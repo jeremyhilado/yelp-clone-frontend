@@ -1,7 +1,6 @@
 import React, {useState, useContext} from 'react'
 import {RundownContext} from '../App'
 import {Redirect} from 'react-router-dom'
-import {deleteBusiness} from '../services/api-helper'
 
 function EditBusiness(props) {
     const rundownContext = useContext(RundownContext)
@@ -14,24 +13,13 @@ function EditBusiness(props) {
         return business.name === props.match.params.name
     })
 
-    const delBusiness = async (id) => {
-        await deleteBusiness(Number(props.match.params.id), rundownContext.userInfo.token).then(res => {
-            if(res.status == 204) {
-                alert('Business successfully deleted!')
-                setIsDeleted(true)
-            } else {
-                alert('We are unable to delete this business.')
-            }
-        }).then(setIsDeleted(false))
-    }
-
     console.log('EditBusiness business', business)
 
     if(business[0]) {
         return(
             <div className="container add-business">
                 <h1>Edit Business</h1>
-                <form onSubmit={rundownContext.handleCreateBusiness}>
+                <form onSubmit={rundownContext.handleEditBusiness}>
                     <div className="form-group">
                         <label for="exampleInputEmail1">Name</label>
                         <input 
@@ -42,6 +30,7 @@ function EditBusiness(props) {
                             name='name'
                             value={rundownContext.businessInfo.name}
                             onChange={rundownContext.handleBusinessChange}
+                            placeholder={business[0].name}
                         />
                     </div>
                     <div className="form-group">
@@ -54,6 +43,7 @@ function EditBusiness(props) {
                             name='image_url'
                             value={rundownContext.businessInfo.image_url}
                             onChange={rundownContext.handleBusinessChange}
+                            placeholder={business[0].image_url}
                         />
                     </div>
                     <div className="form-group">
@@ -66,6 +56,7 @@ function EditBusiness(props) {
                             name='location_city'
                             value={rundownContext.businessInfo.location_city}
                             onChange={rundownContext.handleBusinessChange}
+                            placeholder={business[0].location_city}
                         />
                     </div>
                     <div className="form-group">
@@ -78,6 +69,7 @@ function EditBusiness(props) {
                             name='location_state'
                             value={rundownContext.businessInfo.location_state}
                             onChange={rundownContext.handleBusinessChange}
+                            placeholder={business[0].location_state}
                         />
                     </div>
                     <div className="form-group">
@@ -89,6 +81,7 @@ function EditBusiness(props) {
                             name='category'
                             value={rundownContext.businessInfo.category}
                             onChange={rundownContext.handleBusinessChange}
+                            placeholder={business[0].category}
                         />
                     </div>
                     <div className="form-group">
@@ -101,6 +94,7 @@ function EditBusiness(props) {
                             name='price'
                             value={rundownContext.businessInfo.price}
                             onChange={rundownContext.handleBusinessChange}
+                            placeholder={business[0].price}
                         />
                     </div>
                     <div className="form-group">
@@ -112,6 +106,7 @@ function EditBusiness(props) {
                             name='phone'
                             value={rundownContext.businessInfo.phone}
                             onChange={rundownContext.handleBusinessChange}
+                            placeholder={business[0].phone}
                         />
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
