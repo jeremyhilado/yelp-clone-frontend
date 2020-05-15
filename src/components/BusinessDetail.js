@@ -1,12 +1,21 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import {RundownContext} from '../App'
 import {Link, Redirect} from 'react-router-dom'
-import {deleteBusiness} from '../services/api-helper'
+import {deleteBusiness, getBusinesses, getReviews} from '../services/api-helper'
 
 function BusinessDetail(props) {
     const rundownContext = useContext(RundownContext)
     rundownContext.setBusinessId(Number(props.match.params.id))
     const [isDeleted, setIsDeleted] = useState(false)
+    const [reviews, setReviews] = useState([])
+
+    useEffect(() => {
+        const makeApiCall = async () => {
+            const res = await getReviews(rundownContext.userInfo.token)
+            setReviews(res.data)
+        }
+        makeApiCall()
+      }, [reviews])
 
     console.log('BusinessDetail props', props)
     

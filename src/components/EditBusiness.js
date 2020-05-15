@@ -5,7 +5,6 @@ import {Redirect} from 'react-router-dom'
 function EditBusiness(props) {
     const rundownContext = useContext(RundownContext)
     rundownContext.setBusinessId(Number(props.match.params.id))
-    const [isDeleted, setIsDeleted] = useState(false)
 
     console.log('EditBusiness props', props)
 

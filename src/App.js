@@ -148,7 +148,7 @@ function App() {
         setReviews(res2.data)
     }
     makeApiCall()
-  }, [businesses, reviewCreated])
+  }, [])
 
   console.log('App - reviews', reviews)
 

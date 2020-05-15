@@ -15,7 +15,7 @@ function CreateReview(props) {
 
     if(business[0]) {
         return(
-            <div className="container detail-info">
+            <div className="container">
                 <h1>{business[0].name}</h1>
                 <h4>Leave a review!</h4>
                 <form className="review-form" onSubmit={rundownContext.handleCreateReview}>
