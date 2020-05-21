@@ -30,6 +30,7 @@ function App() {
     review: ''
   })
   const [reviewCreated, setReviewCreated] = useState(false)
+  const [reviewEdited, setReviewEdited] = useState(false)
   const [reviewId, setReviewId] = useState('')
   const [reviews, setReviews] = useState([])
   const [businessInfo, setBusinessInfo] = useState({
@@ -42,7 +43,11 @@ function App() {
     phone: ''
   })
   const [businessCreated, setBusinessCreated] = useState(false)
+  const [businessEdited, setBusinessEdited] = useState(false)
   const [businessId, setBusinessId] = useState('')
+
+  console.log('App - reviewCreated', reviewCreated)
+  console.log('App - reviewEdited', reviewEdited)
 
   const handleLoginChange = e => {
     const value = e.target.value
@@ -101,7 +106,9 @@ function App() {
       } else {
         alert('There was a problem with creating your review.')
       }
-    }).then(setReviewCreated(false))
+    })
+    setReviewCreated(false)
+    setReviewInfo('')
   }
 
   const handleCreateBusiness = async (e) => {
@@ -121,11 +128,13 @@ function App() {
     await updateReview(reviewId, reviewInfo, userInfo.token).then(res => {
       if(res.status === 200) {
         alert('Review successfully updated!')
-        setReviewCreated(true)
+        setReviewEdited(true)
       } else {
         alert('There was a problem with editing your review.')
       }
-    }).then(setReviewCreated(false))
+    })
+    setReviewEdited(false)
+    setReviewInfo('')
   }
 
   const handleEditBusiness = async (e) => {
@@ -133,11 +142,11 @@ function App() {
     await updateBusiness(businessId, businessInfo, userInfo.token).then(res => {
       if(res.status === 200) {
         alert('Business successfully updated!')
-        setBusinessCreated(true)
+        setBusinessEdited(true)
       } else {
         alert('There was a problem with editing this business.')
       }
-    }).then(setBusinessCreated(false))
+    }).then(setBusinessEdited(false))
   }
   
   useEffect(() => {
@@ -148,7 +157,7 @@ function App() {
         setReviews(res2.data)
     }
     makeApiCall()
-  }, [])
+  }, [businesses, reviews])
 
   console.log('App - reviews', reviews)
 
@@ -184,11 +193,15 @@ function App() {
           businessInfo,
           handleCreateBusiness,
           setBusinessId,
-          handleEditBusiness
+          handleEditBusiness,
+          reviewEdited,
+          setReviewInfo,
+          businessEdited,
+          setBusinessEdited
         }
       }>
         <Navbar/>
-        <Main/>
+        <Main businesses={businesses} reviews={reviews}/>
       </RundownContext.Provider>
     </div>
   );

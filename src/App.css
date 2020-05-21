@@ -94,6 +94,10 @@
   margin-right: 10px;
 }
 
+.dashboard-card {
+  margin-bottom: 50px;
+}
+
 @media(min-width: 769px) {
   .detail-info {
     grid-template-columns: repeat(2, 1fr);
