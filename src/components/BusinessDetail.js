@@ -7,15 +7,6 @@ function BusinessDetail(props) {
     const rundownContext = useContext(RundownContext)
     rundownContext.setBusinessId(Number(props.match.params.id))
     const [isDeleted, setIsDeleted] = useState(false)
-    const [reviews, setReviews] = useState([])
-
-    useEffect(() => {
-        const makeApiCall = async () => {
-            const res = await getReviews(rundownContext.userInfo.token)
-            setReviews(res.data)
-        }
-        makeApiCall()
-      }, [reviews])
 
     console.log('BusinessDetail props', props)
     
@@ -29,7 +20,8 @@ function BusinessDetail(props) {
         await deleteBusiness(business[0].id, rundownContext.userInfo.token).then(res => {
                 alert('Business successfully deleted!')
                 setIsDeleted(true)
-        }).then(setIsDeleted(false))
+        })
+        setIsDeleted(false)
     }
 
 

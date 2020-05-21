@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import {RundownContext} from '../App'
 import {Redirect} from 'react-router-dom'
 
-function Register(props) {
+function Register() {
     const rundownContext = useContext(RundownContext)
    
     return(

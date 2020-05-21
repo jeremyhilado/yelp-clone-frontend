@@ -66,7 +66,7 @@ function EditReview(props) {
                     <button type="submit" className="btn btn-info" name="business" value={business[0].id} onClick={rundownContext.handleReviewChange}>Post Review</button>
                     <button type="button" className="btn btn-danger edit-review-del" onClick={delReview}>Delete</button>
                 </form>
-                {(rundownContext.reviewCreated || isDeleted) && <Redirect to={`/business/${business[0].name}`} />}
+                {(rundownContext.reviewEdited || isDeleted) && <Redirect to={`/business/${business[0].name}`} />}
             </div>
         )
     } else {
